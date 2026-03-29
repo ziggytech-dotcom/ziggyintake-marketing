@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     description:
       "Smart intake forms that auto-flow into your CRM. $19/mo flat. No per-submission fees.",
   },
+
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
