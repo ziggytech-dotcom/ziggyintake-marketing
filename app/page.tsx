@@ -1,334 +1,460 @@
-import CTAButton from "@/components/CTAButton";
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "ZiggyIntake — Beautiful forms that actually do something with the answers.",
+  description:
+    "Smart forms, lead capture & client intake automation. Drag-and-drop builder, conditional logic, file uploads, Supabase sync — $19/mo flat. No response limits.",
+  keywords:
+    "intake forms, lead capture, form builder, conditional logic, file uploads, Supabase sync, embed forms",
+  openGraph: {
+    title: "ZiggyIntake — Beautiful forms that actually do something with the answers.",
+    description:
+      "Smart intake forms for service businesses, agencies & coaches. $19/mo flat. Unlimited responses, no caps, no watermarks.",
+    url: "https://ziggyintake.com",
+    siteName: "ZiggyIntake",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ZiggyIntake — Beautiful forms that actually do something with the answers.",
+    description:
+      "Smart intake forms for service businesses. $19/mo flat, unlimited responses, Supabase sync.",
+  },
+};
+
+const ACCENT = "#8b5cf6";
+const BG = "#0a0a0a";
+const CARD = "#111111";
+const BORDER = "1px solid #1f1f1f";
+const RADIUS = "14px";
 
 const features = [
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    title: "ZiggyHQ Auto-Integration",
+    emoji: "🖱️",
+    name: "Drag-and-Drop Builder",
     description:
-      "Every submission flows directly into your ZiggyHQ CRM as a structured lead — zero manual entry, zero lost contacts.",
+      "Build professional forms in minutes — no code required. Add fields, reorder sections, and launch without touching a line of code.",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
-    title: "Conditional Logic",
+    emoji: "🔀",
+    name: "Conditional Logic",
     description:
-      "Show or hide fields based on previous answers. Build smart forms that adapt to each respondent automatically.",
+      "Show or hide questions based on previous answers. Build smart forms that adapt to each respondent in real time.",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-      </svg>
-    ),
-    title: "E-Signature Field",
+    emoji: "📎",
+    name: "File Uploads",
     description:
-      "Collect legally-binding signatures directly in your forms. Perfect for contracts, consent forms, and service agreements.",
+      "Let clients attach documents, photos, IDs, contracts, or insurance cards directly inside your intake form.",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-      </svg>
-    ),
-    title: "File Uploads",
+    emoji: "📋",
+    name: "Multi-Step Forms",
     description:
-      "Let clients upload IDs, insurance cards, photos, or documents directly through your intake form.",
+      "Break long forms into a smooth conversational flow. Higher completion rates, less abandonment.",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-      </svg>
-    ),
-    title: "Custom Branding",
+    emoji: "🔗",
+    name: "Embed Anywhere",
     description:
-      "Use your own logo, colors, and domain. Forms that look like they were built in-house — because they were.",
+      "Drop your form on your website, landing page, emails, or link-in-bio. One snippet, works everywhere.",
   },
   {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    title: "Analytics Dashboard",
+    emoji: "🗄️",
+    name: "Supabase Sync",
     description:
-      "Track form views, completion rates, drop-off points, and lead quality — all in one clean dashboard.",
+      "All responses sync automatically to your own Supabase database — your data, your infrastructure, always.",
+  },
+  {
+    emoji: "🔔",
+    name: "Email Notifications",
+    description:
+      "Get notified the instant a form is submitted. Real-time alerts so you never miss a new lead.",
+  },
+  {
+    emoji: "🎨",
+    name: "Custom Branding",
+    description:
+      "Add your logo, match your colors, and remove all 'Powered by' watermarks. Forms that look built in-house.",
   },
 ];
 
-const steps = [
+const comingSoon = [
   {
-    number: "01",
-    title: "Build your intake form",
-    description:
-      "Drag and drop fields, add conditional logic, and style it to match your brand in minutes — no code required.",
+    emoji: "🤝",
+    name: "CRM Sync",
+    description: "Native ZiggyHQ integration — every submission auto-creates a structured lead in your CRM.",
+    badge: "In Development",
+    badgeColor: "#ff9500",
   },
   {
-    number: "02",
-    title: "Share your form link",
-    description:
-      "Embed it on your website, share a direct link, or send it via email. Works perfectly on every device.",
+    emoji: "💳",
+    name: "Payment Collection",
+    description: "Collect deposits, booking fees, or one-time payments directly inside your intake form.",
+    badge: "Coming Soon",
+    badgeColor: "#0066ff",
   },
   {
-    number: "03",
-    title: "Watch leads appear in ZiggyHQ",
-    description:
-      "Every submission auto-creates a lead in your CRM. Follow up faster, close more deals.",
+    emoji: "✍️",
+    name: "E-Signature Fields",
+    description: "Collect legally-binding signatures on contracts, consent forms, and service agreements.",
+    badge: "Coming Soon",
+    badgeColor: "#0066ff",
   },
 ];
 
-const testimonials = [
+const industries = [
   {
-    quote:
-      "We used to manually copy form submissions into our CRM. ZiggyIntake eliminated that entirely. Now leads just show up ready to contact.",
-    author: "Marcus T.",
-    role: "Owner, Elite Restoration Co.",
+    emoji: "💼",
+    name: "Agencies & Consultants",
+    description: "Client onboarding, project briefs, discovery questionnaires",
   },
   {
-    quote:
-      "The e-signature field alone saved us hours every week. Clients sign their service agreement right in the intake form.",
-    author: "Sarah K.",
-    role: "Practice Manager, KineCare Health",
+    emoji: "🏠",
+    name: "Real Estate",
+    description: "Buyer/seller questionnaires, lead capture, mortgage pre-qual intake",
   },
   {
-    quote:
-      "We manage forms for 12 clients. Custom branding per client, all submissions centralized. ZiggyIntake is a game-changer for our agency.",
-    author: "Dominic R.",
-    role: "Director, Apex Digital Agency",
+    emoji: "🏥",
+    name: "Healthcare & Wellness",
+    description: "New patient intake, health history, consent forms",
+  },
+  {
+    emoji: "🎓",
+    name: "Coaches & Educators",
+    description: "Student intake, program application, assessment forms",
+  },
+  {
+    emoji: "🔨",
+    name: "Contractors & Home Services",
+    description: "Quote requests, project scope forms, inspection checklists",
+  },
+  {
+    emoji: "🎨",
+    name: "Photographers & Creatives",
+    description: "Booking intake, style questionnaires, licensing agreements",
+  },
+  {
+    emoji: "🐾",
+    name: "Pet Services",
+    description: "New client intake, pet health history, grooming preferences",
+  },
+  {
+    emoji: "🚗",
+    name: "Auto Services",
+    description: "Service intake, damage assessment, customer consent",
+  },
+];
+
+const comparisonRows = [
+  { feature: "Price", ziggy: "$19/mo flat", typeform: "$29/mo+" },
+  { feature: "Responses/mo", ziggy: "Unlimited", typeform: "Capped on base plans" },
+  { feature: "Forms allowed", ziggy: "Unlimited", typeform: "Limited on base plans" },
+  { feature: "Conditional logic", ziggy: "✅ Included", typeform: "Higher tiers only" },
+  { feature: "File uploads", ziggy: "✅ Included", typeform: "Higher tiers only" },
+  { feature: "Custom branding", ziggy: "✅ No watermark", typeform: "Paid add-on" },
+  { feature: "Response limits", ziggy: "None — ever", typeform: "Hard caps on lower plans" },
+  { feature: "Data ownership", ziggy: "Your Supabase DB", typeform: "Their servers" },
+  { feature: "Embed options", ziggy: "Website, email, link-in-bio", typeform: "Embed + share link" },
+  { feature: "CRM sync", ziggy: "Coming soon (native)", typeform: "Zapier only ($)" },
+];
+
+const faqs = [
+  {
+    q: "Is there really a 14-day free trial?",
+    a: "Yes — start building and collecting responses for free for 14 days. No credit card required. Cancel or subscribe at the end.",
+  },
+  {
+    q: "What happens when I hit my response limit?",
+    a: "You never will. ZiggyIntake has zero response limits. Collect as many submissions as you want, forever.",
+  },
+  {
+    q: "Can I embed forms on my existing website?",
+    a: "Absolutely. Copy a one-line embed snippet and paste it anywhere — WordPress, Webflow, Squarespace, custom HTML, emails, you name it.",
+  },
+  {
+    q: "Do I need a Supabase account?",
+    a: "You can use our built-in response dashboard without any external setup. If you want direct database sync, you connect your own Supabase project — it takes about 2 minutes.",
+  },
+  {
+    q: "How is this different from Typeform?",
+    a: "Typeform charges $29/mo and caps responses on base plans. ZiggyIntake is $19/mo with unlimited responses, no watermarks, and your data syncs directly to your own database. See the full comparison below.",
+  },
+  {
+    q: "Can I use my own branding on every form?",
+    a: "Yes — your logo, your colors, no 'Powered by ZiggyIntake' anywhere. Every plan includes full white-label branding.",
   },
 ];
 
 export default function HomePage() {
   return (
-    <>
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden pt-24 pb-28 px-4">
-        {/* Background glow */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
-        </div>
+    <div style={{ background: BG, color: "#ffffff", fontFamily: "'Space Grotesk', sans-serif" }}>
+      <style>{`@media(max-width:768px){.nav-links{display:none}}`}</style>
 
-        <div className="relative max-w-5xl mx-auto text-center">
+      {/* ── Hero ── */}
+      <section
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          padding: "96px 24px 112px",
+          textAlign: "center",
+        }}
+      >
+        {/* Glow blob */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 800,
+            height: 400,
+            background: "rgba(139,92,246,0.10)",
+            borderRadius: "50%",
+            filter: "blur(120px)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-card border border-border rounded-full px-4 py-1.5 mb-8">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-xs text-zinc-400 font-medium">
-              Now with ZiggyHQ CRM auto-sync
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              background: CARD,
+              border: BORDER,
+              borderRadius: 99,
+              padding: "6px 16px",
+              marginBottom: 32,
+            }}
+          >
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: ACCENT,
+                display: "inline-block",
+              }}
+            />
+            <span style={{ fontSize: 12, color: "#a1a1aa", fontWeight: 500 }}>
+              14-day free trial — no credit card required
             </span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
-            Every form submission
+          <h1
+            style={{
+              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+              fontWeight: 700,
+              lineHeight: 1.05,
+              letterSpacing: "-0.02em",
+              marginBottom: 24,
+            }}
+          >
+            Beautiful forms that actually
             <br />
-            <span className="text-accent">becomes a lead.</span>
+            <span style={{ color: ACCENT }}>do something with the answers.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Forms that turn into leads automatically. ZiggyIntake connects your intake forms
-            directly to your CRM so nothing slips through the cracks — ever.
+          <p
+            style={{
+              fontSize: "clamp(1rem, 2vw, 1.2rem)",
+              color: "#a1a1aa",
+              maxWidth: 600,
+              margin: "0 auto 40px",
+              lineHeight: 1.7,
+            }}
+          >
+            Smart intake forms for service businesses, agencies, and coaches. Capture leads,
+            qualify clients, and onboard customers — all without touching a line of code.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-            <CTAButton href="https://app.ziggyintake.com/signup" size="lg">
-              Start Free — $19/mo
-            </CTAButton>
+          {/* CTAs */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 16,
+              justifyContent: "center",
+              marginBottom: 56,
+            }}
+          >
             <a
-              href="#how-it-works"
-              className="text-sm text-zinc-400 hover:text-white transition-colors flex items-center gap-2"
+              href="https://app.ziggyintake.com/signup"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: ACCENT,
+                color: "#fff",
+                fontWeight: 700,
+                fontSize: 15,
+                padding: "14px 28px",
+                borderRadius: 10,
+                textDecoration: "none",
+                transition: "opacity 0.15s",
+              }}
             >
-              See how it works
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              Start Free Trial — $19/mo after
+              <span style={{ fontSize: 18 }}>→</span>
+            </a>
+            <a
+              href="#features"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "transparent",
+                color: "#a1a1aa",
+                fontWeight: 500,
+                fontSize: 14,
+                padding: "14px 24px",
+                borderRadius: 10,
+                border: BORDER,
+                textDecoration: "none",
+              }}
+            >
+              See all features ↓
             </a>
           </div>
 
           {/* Trust badges */}
-          <div className="flex flex-wrap items-center justify-center gap-8 text-xs text-zinc-600">
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              No credit card required
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              Unlimited submissions
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              Cancel anytime
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              ZiggyHQ CRM included
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Features Grid ── */}
-      <section className="py-24 px-4 bg-card/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
-              Everything you need
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Powerful features, flat pricing
-            </h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
-              Every feature is included at $19/mo. No tiers, no upsells, no per-submission fees.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                className="bg-card border border-border rounded-xl p-6 hover:border-accent/40 transition-colors duration-200 group"
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 32,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {[
+              "✅ 14-day free trial",
+              "✅ No credit card required",
+              "✅ Cancel anytime",
+            ].map((badge) => (
+              <span
+                key={badge}
+                style={{ fontSize: 13, color: "#52525b", fontWeight: 500 }}
               >
-                <div className="w-11 h-11 rounded-lg bg-accent/10 flex items-center justify-center text-accent mb-4 group-hover:bg-accent/20 transition-colors">
-                  {feature.icon}
-                </div>
-                <h3 className="text-base font-semibold mb-2">{feature.title}</h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
-              </div>
+                {badge}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── How It Works ── */}
-      <section id="how-it-works" className="py-24 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
-              How it works
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Up and running in minutes
-            </h2>
-            <p className="text-zinc-400 max-w-xl mx-auto">
-              No complex setup. No dev work. Just build, share, and watch leads flow in.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
-              <div key={step.number} className="relative flex flex-col items-start">
-                {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-5 left-full w-full h-px bg-gradient-to-r from-border to-transparent -translate-y-px" />
-                )}
-                <div className="text-4xl font-bold text-accent/20 mb-4 font-mono">{step.number}</div>
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
-                <p className="text-sm text-zinc-500 leading-relaxed">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing Teaser ── */}
-      <section className="py-24 px-4 bg-card/30">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-card border border-border rounded-2xl p-10 relative overflow-hidden">
-            {/* Glow */}
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
-
-            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      {/* ── Problem Strip ── */}
+      <section
+        style={{
+          background: "#0d0d0d",
+          borderTop: BORDER,
+          borderBottom: BORDER,
+          padding: "64px 24px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 40,
+          }}
+        >
+          {[
+            {
+              emoji: "😤",
+              title: "Form submissions pile up in email",
+              desc: "Clients fill out your form. You manually copy the data into a spreadsheet or CRM. It's 2024 — this shouldn't still be happening.",
+            },
+            {
+              emoji: "💸",
+              title: "Typeform charges $29/mo and still caps responses",
+              desc: "You hit 100 responses and your form goes dark mid-month. And you're still paying more for a tool that does less.",
+            },
+            {
+              emoji: "🕳️",
+              title: "Leads fall through the cracks",
+              desc: "Without instant notifications and automated routing, qualified leads sit uncontacted for hours while your competitor follows up in minutes.",
+            },
+          ].map((pain) => (
+            <div key={pain.title} style={{ display: "flex", gap: 16 }}>
+              <div style={{ fontSize: 28, flexShrink: 0 }}>{pain.emoji}</div>
               <div>
-                <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
-                  Simple pricing
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                  One price.
-                  <br />
-                  Everything included.
-                </h2>
-                <p className="text-zinc-400 mb-6 leading-relaxed">
-                  No tiers. No feature gates. No per-submission fees that surprise you at the end of the month.
-                </p>
-                <CTAButton href="/pricing" variant="outline">
-                  See full pricing
-                </CTAButton>
-              </div>
-
-              <div className="text-center md:text-right">
-                <div className="inline-block">
-                  <div className="text-7xl font-bold text-white mb-1">
-                    $19
-                    <span className="text-2xl text-zinc-500 font-normal">/mo</span>
-                  </div>
-                  <div className="text-sm text-zinc-500 mb-6">
-                    vs Typeform&apos;s $25-83/mo &bull; vs Jotform&apos;s per-submission fees
-                  </div>
-                  <ul className="text-sm text-zinc-400 space-y-2 text-left">
-                    {[
-                      "Unlimited forms",
-                      "Unlimited submissions",
-                      "All features included",
-                      "ZiggyHQ CRM sync",
-                      "Custom branding",
-                      "Priority support",
-                    ].map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <svg className="w-4 h-4 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                <div
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 15,
+                    marginBottom: 8,
+                    color: "#fff",
+                  }}
+                >
+                  {pain.title}
+                </div>
+                <div style={{ fontSize: 13, color: "#71717a", lineHeight: 1.6 }}>
+                  {pain.desc}
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section className="py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-3">
-              Trusted by businesses
+      {/* ── Features ── */}
+      <section id="features" style={{ padding: "96px 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 64 }}>
+            <p
+              style={{
+                color: ACCENT,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              Everything included
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold">
-              Real results, real businesses
+            <h2
+              style={{
+                fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+                fontWeight: 700,
+                marginBottom: 16,
+              }}
+            >
+              Powerful features. Flat $19/mo.
             </h2>
+            <p style={{ color: "#71717a", maxWidth: 500, margin: "0 auto", lineHeight: 1.6 }}>
+              No tiers, no upsells, no per-response fees. Every feature below is included from day one.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {features.map((f) => (
               <div
-                key={t.author}
-                className="bg-card border border-border rounded-xl p-7 flex flex-col gap-4"
+                key={f.name}
+                style={{
+                  background: CARD,
+                  border: BORDER,
+                  borderRadius: RADIUS,
+                  padding: "24px",
+                }}
               >
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-sm text-zinc-300 leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
-                <div>
-                  <div className="text-sm font-semibold">{t.author}</div>
-                  <div className="text-xs text-zinc-500">{t.role}</div>
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{f.emoji}</div>
+                <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 8 }}>{f.name}</div>
+                <div style={{ fontSize: 13, color: "#71717a", lineHeight: 1.6 }}>
+                  {f.description}
                 </div>
               </div>
             ))}
@@ -336,30 +462,612 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Final CTA Banner ── */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-accent/20 via-card to-card border border-accent/30 p-12 text-center">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[200px] bg-accent/10 rounded-full blur-3xl" />
-            </div>
-            <div className="relative">
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                Stop losing leads in your inbox.
-              </h2>
-              <p className="text-zinc-400 mb-8 max-w-xl mx-auto text-lg">
-                Join hundreds of businesses that turned their intake forms into an automated lead machine.
+      {/* ── Coming Soon Strip ── */}
+      <section
+        style={{
+          background: "#0d0d0d",
+          borderTop: BORDER,
+          borderBottom: BORDER,
+          padding: "80px 24px",
+        }}
+      >
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p
+              style={{
+                color: ACCENT,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              On the roadmap
+            </p>
+            <h2 style={{ fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700 }}>
+              What's coming next
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {comingSoon.map((item) => (
+              <div
+                key={item.name}
+                style={{
+                  background: CARD,
+                  border: BORDER,
+                  borderRadius: RADIUS,
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <span style={{ fontSize: 24 }}>{item.emoji}</span>
+                  <span style={{ fontWeight: 600, fontSize: 15 }}>{item.name}</span>
+                  <span
+                    style={{
+                      marginLeft: "auto",
+                      background: item.badgeColor + "20",
+                      color: item.badgeColor,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      padding: "3px 10px",
+                      borderRadius: 99,
+                      border: `1px solid ${item.badgeColor}40`,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {item.badge}
+                  </span>
+                </div>
+                <div style={{ fontSize: 13, color: "#71717a", lineHeight: 1.6 }}>
+                  {item.description}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Industries ── */}
+      <section style={{ padding: "96px 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 64 }}>
+            <p
+              style={{
+                color: ACCENT,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              Built for your industry
+            </p>
+            <h2 style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700 }}>
+              ZiggyIntake works for everyone who
+              <br />
+              collects client information
+            </h2>
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 16,
+              marginBottom: 40,
+            }}
+          >
+            {industries.map((ind) => (
+              <div
+                key={ind.name}
+                style={{
+                  background: CARD,
+                  border: BORDER,
+                  borderRadius: RADIUS,
+                  padding: "20px 22px",
+                  display: "flex",
+                  gap: 14,
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontSize: 24, flexShrink: 0 }}>{ind.emoji}</span>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>
+                    {ind.name}
+                  </div>
+                  <div style={{ fontSize: 12, color: "#71717a", lineHeight: 1.5 }}>
+                    {ind.description}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Custom callout */}
+          <div
+            style={{
+              background: CARD,
+              border: `1px solid ${ACCENT}30`,
+              borderRadius: RADIUS,
+              padding: "24px 32px",
+              textAlign: "center",
+            }}
+          >
+            <p style={{ color: "#a1a1aa", fontSize: 14, marginBottom: 12 }}>
+              Don't see your industry? We build custom form setups for any use case.
+            </p>
+            <a
+              href="mailto:hello@ziggyintake.com"
+              style={{
+                color: ACCENT,
+                fontWeight: 600,
+                fontSize: 14,
+                textDecoration: "none",
+              }}
+            >
+              Need a custom form setup? Contact us →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Comparison Table ── */}
+      <section
+        id="compare"
+        style={{
+          background: "#0d0d0d",
+          borderTop: BORDER,
+          borderBottom: BORDER,
+          padding: "96px 24px",
+        }}
+      >
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <p
+              style={{
+                color: ACCENT,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              How we stack up
+            </p>
+            <h2 style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700 }}>
+              ZiggyIntake vs Typeform
+            </h2>
+          </div>
+
+          <div style={{ overflowX: "auto" }}>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "collapse",
+                background: CARD,
+                border: BORDER,
+                borderRadius: RADIUS,
+                overflow: "hidden",
+                minWidth: 600,
+              }}
+            >
+              <thead>
+                <tr style={{ borderBottom: BORDER }}>
+                  <th
+                    style={{
+                      textAlign: "left",
+                      padding: "16px 24px",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#71717a",
+                      width: "40%",
+                    }}
+                  >
+                    Feature
+                  </th>
+                  <th
+                    style={{
+                      padding: "16px 24px",
+                      fontSize: 13,
+                      fontWeight: 700,
+                      color: ACCENT,
+                      textAlign: "center",
+                      width: "30%",
+                    }}
+                  >
+                    ZiggyIntake
+                    <div style={{ fontSize: 11, fontWeight: 400, marginTop: 2, opacity: 0.7 }}>
+                      $19/mo
+                    </div>
+                  </th>
+                  <th
+                    style={{
+                      padding: "16px 24px",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#71717a",
+                      textAlign: "center",
+                      width: "30%",
+                    }}
+                  >
+                    Typeform
+                    <div style={{ fontSize: 11, fontWeight: 400, marginTop: 2 }}>
+                      $29/mo+
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row, i) => (
+                  <tr
+                    key={row.feature}
+                    style={{
+                      borderBottom: i < comparisonRows.length - 1 ? BORDER : "none",
+                      background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
+                    }}
+                  >
+                    <td
+                      style={{
+                        padding: "14px 24px",
+                        fontSize: 14,
+                        fontWeight: 500,
+                        color: "#d4d4d8",
+                      }}
+                    >
+                      {row.feature}
+                    </td>
+                    <td
+                      style={{
+                        padding: "14px 24px",
+                        fontSize: 13,
+                        textAlign: "center",
+                        color: ACCENT,
+                        fontWeight: 600,
+                      }}
+                    >
+                      {row.ziggy}
+                    </td>
+                    <td
+                      style={{
+                        padding: "14px 24px",
+                        fontSize: 13,
+                        textAlign: "center",
+                        color: "#52525b",
+                      }}
+                    >
+                      {row.typeform}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            style={{
+              marginTop: 32,
+              padding: "20px 24px",
+              background: `${ACCENT}10`,
+              border: `1px solid ${ACCENT}30`,
+              borderRadius: RADIUS,
+              textAlign: "center",
+              fontSize: 14,
+              color: "#a1a1aa",
+              lineHeight: 1.6,
+            }}
+          >
+            <strong style={{ color: "#fff" }}>Bottom line:</strong> Typeform charges $29/mo and
+            caps responses on base plans. ZiggyIntake is $19/mo — unlimited responses, no caps, no
+            watermarks. Your data syncs directly to your own database.{" "}
+            <a
+              href="/vs/typeform"
+              style={{ color: ACCENT, textDecoration: "none", fontWeight: 600 }}
+            >
+              Full comparison →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pricing ── */}
+      <section id="pricing" style={{ padding: "96px 24px", textAlign: "center" }}>
+        <div style={{ maxWidth: 680, margin: "0 auto" }}>
+          <p
+            style={{
+              color: ACCENT,
+              fontSize: 12,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              marginBottom: 12,
+            }}
+          >
+            Simple pricing
+          </p>
+          <h2
+            style={{
+              fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+              fontWeight: 700,
+              marginBottom: 16,
+            }}
+          >
+            One plan. Everything included.
+          </h2>
+          <p style={{ color: "#71717a", marginBottom: 48, lineHeight: 1.6 }}>
+            No tiers. No feature gates. No surprise overage fees at the end of the month.
+          </p>
+
+          <div
+            style={{
+              background: CARD,
+              border: `1px solid ${ACCENT}40`,
+              borderRadius: 20,
+              padding: "48px 40px",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Glow */}
+            <div
+              style={{
+                position: "absolute",
+                top: -60,
+                right: -60,
+                width: 240,
+                height: 240,
+                background: `${ACCENT}15`,
+                borderRadius: "50%",
+                filter: "blur(60px)",
+                pointerEvents: "none",
+              }}
+            />
+
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  display: "inline-block",
+                  background: `${ACCENT}20`,
+                  color: ACCENT,
+                  fontWeight: 700,
+                  fontSize: 12,
+                  padding: "4px 14px",
+                  borderRadius: 99,
+                  marginBottom: 24,
+                  border: `1px solid ${ACCENT}40`,
+                }}
+              >
+                14-day free trial
+              </div>
+
+              <div style={{ marginBottom: 8 }}>
+                <span
+                  style={{
+                    fontSize: "clamp(3rem, 8vw, 5rem)",
+                    fontWeight: 800,
+                    lineHeight: 1,
+                  }}
+                >
+                  $19
+                </span>
+                <span style={{ fontSize: 20, color: "#71717a", marginLeft: 4 }}>/mo</span>
+              </div>
+              <p style={{ fontSize: 14, color: "#71717a", marginBottom: 36 }}>
+                Everything. Unlimited. Always.
               </p>
-              <CTAButton href="https://app.ziggyintake.com/signup" size="lg">
-                Get Started Free — $19/mo
-              </CTAButton>
-              <p className="text-xs text-zinc-600 mt-4">
+
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: "0 0 40px",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "12px 24px",
+                  textAlign: "left",
+                }}
+              >
+                {[
+                  "Unlimited forms",
+                  "Unlimited responses",
+                  "Conditional logic",
+                  "File uploads",
+                  "Multi-step forms",
+                  "Embed anywhere",
+                  "Supabase sync",
+                  "Email notifications",
+                  "Response dashboard",
+                  "Custom branding",
+                  "Webhooks & integrations",
+                  "Priority support",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontSize: 13,
+                      color: "#d4d4d8",
+                    }}
+                  >
+                    <span style={{ color: ACCENT, fontSize: 15 }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="https://app.ziggyintake.com/signup"
+                style={{
+                  display: "inline-block",
+                  background: ACCENT,
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  padding: "16px 40px",
+                  borderRadius: 10,
+                  textDecoration: "none",
+                  width: "100%",
+                  boxSizing: "border-box" as const,
+                  textAlign: "center",
+                }}
+              >
+                Start Free Trial
+              </a>
+              <p style={{ fontSize: 12, color: "#52525b", marginTop: 12 }}>
                 No credit card required. Cancel anytime.
               </p>
             </div>
           </div>
         </div>
       </section>
-    </>
+
+      {/* ── FAQ ── */}
+      <section
+        style={{
+          background: "#0d0d0d",
+          borderTop: BORDER,
+          borderBottom: BORDER,
+          padding: "96px 24px",
+        }}
+      >
+        <div style={{ maxWidth: 740, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <p
+              style={{
+                color: ACCENT,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                marginBottom: 12,
+              }}
+            >
+              FAQ
+            </p>
+            <h2 style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", fontWeight: 700 }}>
+              Common questions
+            </h2>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {faqs.map((faq) => (
+              <div
+                key={faq.q}
+                style={{
+                  background: CARD,
+                  border: BORDER,
+                  borderRadius: RADIUS,
+                  padding: "24px 28px",
+                }}
+              >
+                <div
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 15,
+                    marginBottom: 10,
+                    color: "#fff",
+                  }}
+                >
+                  {faq.q}
+                </div>
+                <div style={{ fontSize: 14, color: "#71717a", lineHeight: 1.7 }}>
+                  {faq.a}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ── */}
+      <section style={{ padding: "96px 24px" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              background: `linear-gradient(135deg, ${ACCENT}20, ${CARD})`,
+              border: `1px solid ${ACCENT}30`,
+              borderRadius: 20,
+              padding: "80px 40px",
+              textAlign: "center",
+            }}
+          >
+            {/* Glow */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%,-50%)",
+                width: 500,
+                height: 200,
+                background: `${ACCENT}10`,
+                borderRadius: "50%",
+                filter: "blur(60px)",
+                pointerEvents: "none",
+              }}
+            />
+
+            <div style={{ position: "relative" }}>
+              <h2
+                style={{
+                  fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+                  fontWeight: 700,
+                  marginBottom: 16,
+                }}
+              >
+                Stop losing leads to a broken process.
+              </h2>
+              <p
+                style={{
+                  color: "#a1a1aa",
+                  fontSize: 16,
+                  lineHeight: 1.7,
+                  maxWidth: 500,
+                  margin: "0 auto 40px",
+                }}
+              >
+                Start collecting smarter today. Build your first form free — no card, no commitment.
+              </p>
+              <a
+                href="https://app.ziggyintake.com/signup"
+                style={{
+                  display: "inline-block",
+                  background: ACCENT,
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  padding: "16px 40px",
+                  borderRadius: 10,
+                  textDecoration: "none",
+                  marginBottom: 16,
+                }}
+              >
+                Start Your Free Trial →
+              </a>
+              <br />
+              <span style={{ fontSize: 12, color: "#52525b" }}>
+                14 days free. $19/mo after. Cancel anytime.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
