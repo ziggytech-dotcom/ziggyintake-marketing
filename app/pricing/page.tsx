@@ -1,280 +1,132 @@
-import type { Metadata } from "next";
-import CTAButton from "@/components/CTAButton";
+'use client'
+import { useState } from 'react'
+import Link from 'next/link'
+import { MarketingNav } from '@/app/components/Nav'
+import { MarketingFooter } from '@/app/components/Footer'
 
-export const metadata: Metadata = {
-  title: "Pricing — ZiggyIntake",
-  description:
-    "ZiggyIntake is $19/mo flat. Unlimited forms, unlimited submissions, all features included. Compare vs Typeform ($25-83/mo) and Jotform (per-submission).",
-};
-
-const included = [
-  "Unlimited forms",
-  "Unlimited submissions",
-  "ZiggyHQ CRM auto-integration",
-  "Conditional logic",
-  "File uploads",
-  "E-signature field",
-  "Custom branding & white-label",
-  "Analytics dashboard",
-  "Custom domain support",
-  "Team members",
-  "Email notifications",
-  "Priority support",
-];
-
-const comparisonRows = [
-  {
-    feature: "Monthly price",
-    ziggy: "$19/mo",
-    typeform: "$25 – $83/mo",
-    jotform: "Varies by submissions",
-    ziggyWins: true,
-  },
-  {
-    feature: "Unlimited submissions",
-    ziggy: "Yes",
-    typeform: "Capped on lower tiers",
-    jotform: "No — per-submission pricing",
-    ziggyWins: true,
-  },
-  {
-    feature: "CRM auto-integration",
-    ziggy: "Built-in (ZiggyHQ)",
-    typeform: "Zapier/3rd party required",
-    jotform: "Zapier/3rd party required",
-    ziggyWins: true,
-  },
-  {
-    feature: "E-signature field",
-    ziggy: "Included",
-    typeform: "Not available",
-    jotform: "Add-on cost",
-    ziggyWins: true,
-  },
-  {
-    feature: "File uploads",
-    ziggy: "Included",
-    typeform: "Higher tiers only",
-    jotform: "Included",
-    ziggyWins: false,
-  },
-  {
-    feature: "Custom branding",
-    ziggy: "Included",
-    typeform: "Higher tiers only",
-    jotform: "Higher tiers only",
-    ziggyWins: true,
-  },
-  {
-    feature: "Conditional logic",
-    ziggy: "Included",
-    typeform: "Higher tiers only",
-    jotform: "Included",
-    ziggyWins: false,
-  },
-  {
-    feature: "Analytics dashboard",
-    ziggy: "Included",
-    typeform: "Included",
-    jotform: "Included",
-    ziggyWins: false,
-  },
-];
-
+const starterFeatures = [
+  `5 forms`,
+  `Unlimited responses`,
+  `Conditional logic`,
+  `File uploads`,
+  `Email notifications`,
+  `Embed anywhere`,
+  `Basic analytics`,
+  `Email support`,
+]
+const proFeatures = [
+  `Everything in Starter`,
+  `Unlimited forms`,
+  `Electronic signatures`,
+  `Auto-CRM sync (ZiggyHQ)`,
+  `Advanced analytics`,
+  `Custom branding`,
+  `Team management`,
+  `Priority support`,
+  `API access`,
+]
+const compRows = [
+  { feature: `Forms included`, starter: `5 forms`, pro: `Unlimited` },
+  { feature: `Responses per month`, starter: `Unlimited`, pro: `Unlimited` },
+  { feature: `Conditional logic`, starter: true, pro: true },
+  { feature: `File uploads`, starter: true, pro: true },
+  { feature: `Embed anywhere`, starter: true, pro: true },
+  { feature: `Basic analytics`, starter: true, pro: true },
+  { feature: `Email notifications`, starter: true, pro: true },
+  { feature: `Electronic signatures`, starter: false, pro: true },
+  { feature: `Auto-CRM sync`, starter: false, pro: true },
+  { feature: `Advanced analytics`, starter: false, pro: true },
+  { feature: `Custom branding`, starter: false, pro: true },
+  { feature: `API access`, starter: false, pro: true },
+  { feature: `Priority support`, starter: false, pro: true },
+]
 const faqs = [
-  {
-    q: "Is there a free trial?",
-    a: "Yes. You can create and publish forms for free during your trial period. No credit card required to start.",
-  },
-  {
-    q: "Can I cancel anytime?",
-    a: "Absolutely. There are no long-term contracts. Cancel anytime from your account settings with no cancellation fees.",
-  },
-  {
-    q: "What happens if I exceed submission limits?",
-    a: "There are no submission limits. $19/mo gets you truly unlimited submissions — no overage fees, no throttling.",
-  },
-  {
-    q: "Does $19/mo include the ZiggyHQ CRM?",
-    a: "ZiggyIntake connects directly with ZiggyHQ, which is a separate product in the ZiggyTech Business Suite. The integration is built-in — no API keys or third-party tools required.",
-  },
-  {
-    q: "Can I use my own domain for the forms?",
-    a: "Yes. Custom domain and subdomain support is included in the $19/mo plan.",
-  },
-  {
-    q: "Is there a discount for annual billing?",
-    a: "Yes — annual billing saves you two months compared to monthly. Contact us for details.",
-  },
-];
+  { q: `Is there a response limit?`, a: `No. Both Starter and Pro include unlimited responses. We don't charge you more because your forms are performing well.` },
+  { q: `Can I embed forms on my website?`, a: `Yes. Every ZiggyIntake form can be embedded as an iframe or inline widget on any website, landing page, or Webflow site.` },
+  { q: `How does the CRM sync work?`, a: `Pro plan includes native ZiggyHQ sync. When a form is submitted, ZiggyIntake checks if a contact with that email exists in ZiggyHQ. If yes, it updates. If not, it creates.` },
+  { q: `Are electronic signatures legally binding?`, a: `Yes. ZiggyIntake e-signatures comply with the ESIGN Act (US) and eIDAS (EU). Every signature is logged with a timestamp, IP address, and email.` },
+]
 
 export default function PricingPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-20 pb-16 px-4">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/10 rounded-full blur-[100px]" />
-        </div>
-        <div className="relative max-w-2xl mx-auto text-center">
-          <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-4">
-            Pricing
-          </p>
-          <h1 className="text-4xl sm:text-5xl font-bold mb-5">
-            Simple pricing.
-            <br />
-            <span className="text-accent">No surprises.</span>
-          </h1>
-          <p className="text-zinc-400 text-lg">
-            One plan. All features. Unlimited everything. $19/mo.
-          </p>
+    <div className="bg-[#0a0a0a] min-h-screen" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+      <MarketingNav />
+      <section className="pt-20 pb-16 px-4 text-center">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#38bdf8] mb-4">Pricing</p>
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">Simple, honest pricing</h1>
+          <p className="text-xl text-[#b3b3b3] max-w-2xl mx-auto">No seat traps. No hidden fees. Just a price that works.</p>
         </div>
       </section>
-
-      {/* Pricing Card */}
-      <section className="pb-20 px-4">
-        <div className="max-w-md mx-auto">
-          <div className="relative bg-card border-2 border-accent/40 rounded-2xl p-8 overflow-hidden">
-            <div className="absolute top-0 right-0 bg-accent text-white text-xs font-bold px-3 py-1.5 rounded-bl-xl">
-              ALL FEATURES
+      <section className="py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-8">
+              <p className="text-sm font-semibold text-[#b3b3b3] uppercase tracking-wider mb-2">Starter</p>
+              <div className="flex items-end gap-1 mb-1"><span className="text-6xl font-bold text-white">$15</span><span className="text-[#b3b3b3] mb-2 text-lg">/mo</span></div>
+              <p className="text-sm text-[#b3b3b3] mb-6">5 forms</p>
+              <Link href="https://app.ziggyintake.com/signup" className="block w-full text-center px-6 py-3.5 bg-[#38bdf8]/10 border border-[#38bdf8]/30 text-[#38bdf8] rounded-xl font-semibold hover:bg-[#38bdf8]/20 transition-all mb-6">Start free trial</Link>
+              <ul className="space-y-3">{starterFeatures.map((f) => <li key={f} className="flex items-start gap-3 text-[#b3b3b3] text-sm"><svg className="w-4 h-4 text-[#38bdf8] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>{f}</li>)}</ul>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent pointer-events-none" />
-
-            <div className="relative">
-              <div className="mb-6">
-                <div className="text-5xl font-bold mb-1">
-                  $19
-                  <span className="text-xl text-zinc-500 font-normal">/mo</span>
+            <div className="bg-[#111111] border-2 border-[#38bdf8]/40 rounded-2xl p-8 relative">
+              <div className="absolute -top-3 left-6"><span className="px-3 py-1 bg-[#38bdf8] text-white text-xs font-bold rounded-full uppercase">Most Popular</span></div>
+              <p className="text-sm font-semibold text-[#b3b3b3] uppercase tracking-wider mb-2">Pro</p>
+              <div className="flex items-end gap-1 mb-1"><span className="text-6xl font-bold text-white">$19</span><span className="text-[#b3b3b3] mb-2 text-lg">/mo</span></div>
+              <p className="text-sm text-[#b3b3b3] mb-6">Unlimited forms · Unlimited responses</p>
+              <Link href="https://app.ziggyintake.com/signup" className="block w-full text-center px-6 py-3.5 bg-[#38bdf8] text-white rounded-xl font-semibold hover:opacity-90 transition-all mb-6">Start free trial</Link>
+              <ul className="space-y-3">{proFeatures.map((f) => <li key={f} className="flex items-start gap-3 text-[#b3b3b3] text-sm"><svg className="w-4 h-4 text-[#38bdf8] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>{f}</li>)}</ul>
+            </div>
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">Feature comparison</h2>
+          <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden mb-16">
+            <div className="grid grid-cols-3 bg-[#1a1a1a] border-b border-[#1f1f1f]">
+              <div className="p-4 text-sm font-semibold text-[#b3b3b3]">Feature</div>
+              <div className="p-4 text-sm font-semibold text-white text-center">Starter</div>
+              <div className="p-4 text-sm font-semibold text-[#38bdf8] text-center">Pro</div>
+            </div>
+            {compRows.map((r) => (
+              <div key={r.feature} className="grid grid-cols-3 border-b border-[#1f1f1f] last:border-0 hover:bg-[#151515]">
+                <div className="p-4 text-sm text-[#b3b3b3]">{r.feature}</div>
+                <div className="p-4 text-center">
+                  {typeof r.starter === 'boolean' ? (r.starter ? <svg className="w-5 h-5 text-[#38bdf8] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg> : <svg className="w-5 h-5 text-[#555] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>) : <span className="text-sm text-[#b3b3b3]">{r.starter}</span>}
                 </div>
-                <div className="text-sm text-zinc-500">Billed monthly &bull; Cancel anytime</div>
+                <div className="p-4 text-center">
+                  {typeof r.pro === 'boolean' ? (r.pro ? <svg className="w-5 h-5 text-[#38bdf8] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg> : <svg className="w-5 h-5 text-[#555] mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>) : <span className="text-sm text-[#38bdf8] font-medium">{r.pro}</span>}
+                </div>
               </div>
-
-              <ul className="space-y-3 mb-8">
-                {included.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <svg className="w-4 h-4 text-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-sm text-zinc-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <CTAButton
-                href="https://app.ziggyintake.com/signup"
-                size="lg"
-                className="w-full justify-center"
-              >
-                Start Free Trial
-              </CTAButton>
-              <p className="text-xs text-zinc-600 text-center mt-3">
-                No credit card required to start
-              </p>
+            ))}
+          </div>
+          <div className="bg-[#111111] border border-[#1f1f1f] rounded-2xl p-6 mb-8 text-center">
+            <p className="text-[#b3b3b3] text-sm mb-2">vs the competition</p>
+            <div className="flex flex-wrap justify-center gap-8">
+              <div><p className="text-[#b3b3b3] text-sm">Typeform</p><p className="text-2xl font-bold text-white">$29<span className="text-base text-[#b3b3b3]">/mo</span></p></div>
+              <div><p className="text-[#38bdf8] text-sm font-medium">ZiggyIntake</p><p className="text-2xl font-bold text-[#38bdf8]">$15<span className="text-base text-[#b3b3b3]">/mo</span></p></div>
+              <div><p className="text-[#b3b3b3] text-sm">Jotform</p><p className="text-2xl font-bold text-white">$39<span className="text-base text-[#b3b3b3]">/mo</span></p></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Comparison Table */}
-      <section className="py-20 px-4 bg-card/30">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-3">How we compare</h2>
-            <p className="text-zinc-400">
-              See why businesses are switching from Typeform and Jotform.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto rounded-xl border border-border">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-card/80 border-b border-border">
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-zinc-400 w-[35%]">
-                    Feature
-                  </th>
-                  <th className="px-6 py-4 text-sm font-bold text-accent w-[21%]">
-                    <div className="flex flex-col items-center gap-1">
-                      <span className="text-base">ZiggyIntake</span>
-                      <span className="text-xs font-normal text-accent/70 bg-accent/10 px-2 py-0.5 rounded-full">
-                        $19/mo
-                      </span>
-                    </div>
-                  </th>
-                  <th className="px-6 py-4 text-sm font-semibold text-zinc-400 w-[22%]">
-                    <div className="flex flex-col items-center gap-1">
-                      <span>Typeform</span>
-                      <span className="text-xs font-normal text-zinc-600">$25-83/mo</span>
-                    </div>
-                  </th>
-                  <th className="px-6 py-4 text-sm font-semibold text-zinc-400 w-[22%]">
-                    <div className="flex flex-col items-center gap-1">
-                      <span>Jotform</span>
-                      <span className="text-xs font-normal text-zinc-600">Per-submission</span>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, i) => (
-                  <tr
-                    key={row.feature}
-                    className={`border-b border-border last:border-b-0 ${
-                      i % 2 === 0 ? "bg-background/40" : ""
-                    }`}
-                  >
-                    <td className="px-6 py-4 text-sm font-medium">{row.feature}</td>
-                    <td className="px-6 py-4 text-sm text-center">
-                      <span
-                        className={`font-semibold ${
-                          row.ziggyWins ? "text-accent" : "text-zinc-300"
-                        }`}
-                      >
-                        {row.ziggy}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-center text-zinc-500">
-                      {row.typeform}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-center text-zinc-500">
-                      {row.jotform}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-20 px-4">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Frequently asked questions
-          </h2>
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <div key={faq.q} className="bg-card border border-border rounded-xl p-6">
-                <h3 className="text-base font-semibold mb-3">{faq.q}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{faq.a}</p>
+          <div className="max-w-2xl mx-auto space-y-3">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Pricing FAQ</h2>
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-[#111111] border border-[#1f1f1f] rounded-2xl overflow-hidden">
+                <button className="w-full flex items-center justify-between p-6 text-left" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                  <span className="text-white font-semibold pr-4">{faq.q}</span>
+                  <svg className={`w-5 h-5 text-[#38bdf8] flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {openFaq === i && <div className="px-6 pb-6"><p className="text-[#b3b3b3] leading-relaxed">{faq.a}</p></div>}
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p className="text-zinc-400 mb-8">
-            Join hundreds of businesses using ZiggyIntake to capture and convert leads automatically.
-          </p>
-          <CTAButton href="https://app.ziggyintake.com/signup" size="lg">
-            Start Free Trial
-          </CTAButton>
+      <section className="py-24 px-4 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-6">Start your free trial today</h2>
+          <p className="text-xl text-[#b3b3b3] mb-8">14 days free. No credit card required.</p>
+          <Link href="https://app.ziggyintake.com/signup" className="inline-flex items-center gap-2 px-10 py-5 bg-[#38bdf8] text-white rounded-xl font-bold text-xl hover:opacity-90 transition-all">Start Free Trial</Link>
         </div>
       </section>
-    </>
-  );
+      <MarketingFooter />
+    </div>
+  )
 }

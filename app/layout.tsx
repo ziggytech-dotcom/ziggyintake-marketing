@@ -1,48 +1,25 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
+import type { Metadata } from "next"
+import { Space_Grotesk } from "next/font/google"
+import "./globals.css"
+import { CookieBanner } from "@/app/components/CookieBanner"
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400","500","600","700"], variable: "--font-space-grotesk" })
 
 export const metadata: Metadata = {
-  title: "ZiggyIntake — Forms that turn into leads automatically.",
-  description:
-    "ZiggyIntake turns every form submission into a lead. Smart intake forms with conditional logic, e-signature, file uploads, and direct ZiggyHQ CRM integration. $19/mo flat.",
-  keywords:
-    "intake forms, lead capture, form builder, conditional logic, e-signature, ZiggyHQ, CRM integration",
-  openGraph: {
-    title: "ZiggyIntake — Forms that turn into leads automatically.",
-    description:
-      "Smart intake forms that auto-flow into your CRM. $19/mo flat. No per-submission fees.",
-    url: "https://ziggyintake.com",
-    siteName: "ZiggyIntake",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "ZiggyIntake — Forms that turn into leads automatically.",
-    description:
-      "Smart intake forms that auto-flow into your CRM. $19/mo flat. No per-submission fees.",
-  },
+  title: { default: "ZiggyIntake — Intake forms that actually convert", template: "%s | ZiggyIntake" },
+  description: "Intake forms that actually convert. Part of the ZiggyTech Business Suite.",
+  openGraph: { title: "ZiggyIntake — Intake forms that actually convert", description: "Intake forms that actually convert.", siteName: "ZiggyIntake", url: "https://ziggyintake.com" },
+  icons: { icon: '/favicon.ico' },
+  metadataBase: new URL("https://ziggyintake.com"),
+}
 
-  icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className="bg-background text-foreground font-sans antialiased">
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+    <html lang="en" className={spaceGrotesk.variable}>
+      <body className="bg-[#0a0a0a] text-white antialiased" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+        {children}
+        <CookieBanner />
       </body>
     </html>
-  );
+  )
 }
