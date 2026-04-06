@@ -48,8 +48,7 @@ export default function HomePage() {
             ZiggyIntake — Intake Forms for local business
           </div>
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight mb-6">
-            Intake forms that actually convert.{' '}
-            {tagline.split('. ').length > 1 && <span className="text-[#38bdf8]"></span>}
+            Intake forms that actually convert
           </h1>
           <p className="text-xl md:text-2xl text-[#b3b3b3] max-w-3xl mx-auto leading-relaxed mb-10">
             Typeform charges $29/month and limits your responses. We built unlimited forms, unlimited responses, conditional logic, and CRM sync for $19/mo.
